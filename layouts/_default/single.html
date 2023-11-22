@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang }}">
+
+<head>
+  {{ partial "head.html" . }}
+
+  <style>
+    .article-title {
+      font-size: 34px;
+      color: #222;
+      margin: 0;
+      line-height: 1.3;
+    }
+
+    .article-duration {
+      font-size: 12px;
+      padding: 1px 5px;
+      font-weight: bold;
+      border-radius: 3px;
+      background: #bbb;
+      color: #fff;
+    }
+
+    .article-wordcount {
+      font-size: 12px;
+      padding: 1px 5px;
+      font-weight: bold;
+      border-radius: 3px;
+      background: #bbc;
+      color: #fff;
+    }
+
+    .article-date {
+      font-size: 13px;
+      color: #ccc;
+    }
+
+    .article-tag {
+      margin-left: 3px;
+      float: right;
+      padding: 1px 5px;
+      border-radius: 6px;
+      font-size: 1rem;
+      color: #9EABB3;
+      border: #E3E9ED 1px solid;
+    }
+
+    .article-content a {
+      text-decoration: none;
+      color: inherit;
+      background: transparent;
+      transition: background 150ms ease;
+    }
+
+    .article-content a:hover,
+    .article-content a:focus {
+      background: #CBF8DF;
+    }
+
+    .article-content p {
+      margin: 10px 0 20px;
+    }
+
+    .article-content hr {
+      height: 1px;
+      overflow: hidden;
+      border: none;
+      background: #e5e5e5;
+    }
+
+    .article-comment {
+      background: #fff;
+      -webkit-box-shadow: 1px 2px 3px #ddd;
+      box-shadow: 1px 2px 3px #ddd;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      margin: 50px 0;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .highlight {
+      border-radius: 3px;
+      position: relative;
+      margin: 40px 0;
+      font-size: 15px;
+    }
+
+    .highlight pre {
+      padding: 10px;
+    }
+
+    .toc details[open] summary {
+      cursor: zoom-out;
+    }
+
+    .toc details summary {
+      cursor: zoom-in;
+      margin-inline-start: 14px;
+    }
+
+    .toc #TableOfContents {
+      padding: 7px;
+      list-style-type: none;
+      margin-left: 10px;
+      direction: ltr;
+      text-align: left;
+      background-color: #f8f9fa;
+      padding: 5px;
+      font-size: 90%;
+    }
+
+    .toc li {
+      margin-bottom: 0.1em;
+      display: list-item;
+      text-align: -webkit-match-parent;
+    }
+
+    .toc ul {
+      list-style: none;
+      line-height: 1.6;
+      padding: 0;
+    }
+
+    .toc ul ul {
+      margin: 0 0 0 2em;
+      text-align: left;
+    }
+
+    a {
+      text-decoration: none;
+      color: #0645ad;
+      background: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    a:active {
+      color: orange;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: #222;
+    }
+
+    code {
+      padding: 0 .25rem;
+      border-radius: .25rem;
+      font-size: .875em;
+    }
+
+    p code {
+      background-color: lightgray;
+    }
+  </style>
+
+</head>
+
+<body>
+  {{ partial "nav.html" . }}
+
+  <main class="content" role="main">
+    <article>
+      <h1 class="article-title">{{ .Title }}</h1>
+      <span class="article-date">{{ .Date.Format "2006-01-02" }}</span>
+      <span class="article-duration">{{ .ReadingTime }} min read</span>
+      <span class="article-wordcount">{{ .WordCount }} words</span>
+
+      <span>
+        {{range $tag := .Params.tags}}
+        <a class="article-tag">{{$tag}}</a>
+        {{end}}
+      </span>
+
+      {{ with .TableOfContents }}
+      {{ if ne . "<nav id=\"TableOfContents\"></nav>" }}
+      <aside class="toc">
+        <details>
+          <summary>
+            {{- i18n "toc" | default "Table of Contents" }}
+          </summary>
+          <div>
+            {{ . }}
+          </div>
+        </details>
+      </aside>
+      {{ end }}
+      {{ end }}
+
+      <div class="article-content">
+        {{ .Content }}
+      </div>
+    </article>
+
+
+    {{if .Params.enableComment}}
+    <div class="article-comment">
+      {{ partial "comments.html" . }}
+    </div>
+    {{end}}
+  </main>
+
+</body>
+
+</html>

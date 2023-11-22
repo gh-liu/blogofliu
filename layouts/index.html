@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang }}">
+
+<head>
+  {{ partial "head.html" . }}
+
+  <style>
+    .archive {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      line-height: 1.3em;
+      text-align: left;
+      color: #111;
+    }
+
+    .archive-title {
+      font-size: 42px;
+      margin-top: 60px;
+    }
+
+    .archive-item {
+      margin: 5px 0 15px;
+      padding: 0;
+    }
+
+    .archive-item-date {
+      color: #ccc;
+      padding: 5px 0;
+      margin-top: 5px;
+      display: block;
+      font-size: 19px;
+      text-align: right;
+      float: right;
+    }
+
+    .archive-item-link {
+      display: inline-block;
+      text-decoration: none;
+      font-size: 21px;
+      font-family: 'Lato', sans-serif;
+      font-weight: bold;
+      color: #222;
+      padding: 5px 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .archive-item-link:hover {
+      border-bottom-color: #222;
+    }
+  </style>
+</head>
+
+<body>
+  {{ partial "nav.html" . }}
+
+  <main class="content" role="main">
+    <div class="archive">
+      {{ range (where site.RegularPages "Type" "in" site.Params.mainSections).GroupByDate "2006" }}
+      <h2 class="archive-title">{{ .Key }}</h2>
+      {{ range .Pages }}
+      <article class="archive-item">
+        <a href="{{ .Permalink }}" class="archive-item-link">{{ .Title }}</a>
+        <span class="archive-item-date">
+          {{ .Date.Format "2006-01-02" }}
+        </span>
+      </article>
+      {{ end }}
+      {{ end }}
+  </main>
+  </div>
+</body>
+
+</html>

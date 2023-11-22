@@ -1,0 +1,49 @@
+baseurl = "https://gh-liu.github.io/"
+languageCode = "en-us"
+title = "Liu"
+# https://gohugo.io/getting-started/configuration/#disablekinds
+# https://gohugo.io/content-management/urls/#permalinks
+# disableKinds = ["section", "taxonomy", "term"]
+# https://gohugo.io/getting-started/configuration/#hascjklanguage
+# hasCJKLanguage = true
+# https://gohugo.io/getting-started/configuration/#summarylength
+summaryLength = 80
+
+# https://gohugo.io/content-management/urls/#permalinks
+[permalinks]
+[permalinks.page]
+posts = "/posts/:year/:month/:slug/"
+[permalinks.section]
+posts = "/posts/"
+
+
+[[menu.main]]
+name = "Posts"
+url = "/"
+
+# [[menu.main]]
+# name = "About"
+# url = "/about"
+
+
+# https://gohugo.io/content-management/taxonomies/#configure-taxonomies
+[taxonomies]
+category = "categories"
+# series = "series"
+tag = "tags"
+
+[params]
+mainSections = ["posts"]
+authorName = "Allen Liu"
+githubUser = "gh-liu"
+description = "It's me!"
+
+[params.logo]
+# path to the favicon, under "static"
+favicon = "images/avatar.jpg"
+width = 50
+height = 50
+
+[markup]
+[markup.highlight]
+style = "nord"
