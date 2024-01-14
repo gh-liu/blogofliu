@@ -1,7 +1,7 @@
 ---
 title : 'Go: Panic'
 date: 2022-07-29T07:52:18Z
-draft : false
+draft : true
 isCJKLanguage : true
 categories:
 - Development
